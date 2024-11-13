@@ -1,27 +1,17 @@
- <IfModule mod_rewrite.c>
+<IfModule mod_rewrite.c>
+    Options -Indexes
+    RewriteEngine On
 
-  <IfModule mod_negotiation.c>
-  </IfModule>
+    # Preserve Authorization header for APIs or other services
+    RewriteCond %{HTTP:Authorization} ^(.+)$
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-  RewriteEngine On
+    # Redirect requests to index.php except for existing files or directories
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
 
-  RewriteCond %{HTTP:Authorization} ^(.+)$
-  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-
-
-  # Static resources if they exist
-  # RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
-  # RewriteRule (.+) public/$1 [L]
-
-  RewriteCond %{REQUEST_FILENAME} -d [OR]
-  RewriteCond %{REQUEST_FILENAME} -f
-  RewriteRule ^ ^$1 [N]
-
-  RewriteCond %{REQUEST_URI} (\.\w+$) [NC]
-  RewriteRule ^(.*)$ public/$1
-
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ server.php
-
+    # Serve static files if they exist
+    RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
+    RewriteRule (.+) public/$1 [L]
 </IfModule>
