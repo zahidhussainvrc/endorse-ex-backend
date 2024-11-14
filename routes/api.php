@@ -32,7 +32,9 @@ use App\Http\Controllers\api\AuthController;
 // });
 
 
-
+Route::get('/', function () {
+    return 'laravel server api working' ; // Replace 'welcome' with your desired view or action
+});
 
 
 Route::get('test', function(){
