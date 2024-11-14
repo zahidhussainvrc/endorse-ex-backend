@@ -34,6 +34,11 @@ use App\Http\Controllers\api\AuthController;
 
 
 
+
+Route::get('test', function(){
+    return "Api Routes Working";
+});
+
 Route::group(['prefix' => 'auth'], function () {
 
     Route::post('register', [AuthController::class, 'register']);
@@ -53,6 +58,8 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('reset-password', [AuthController::class, 'resetPassword']);
 
 });
+
+
 
 Route::group(['prefix' => 'user'], function () {
 
