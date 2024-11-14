@@ -129,7 +129,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::controller(CommitController::class)->group(function(){
         Route::get('/get-all-commits', 'AllCommits')->name('commits.index'); // List commits for an ex-partner
-        Route::get('/get-commits/{id}', 'index')->name('commits.index'); // List commits for an ex-partner
+        Route::get('/get-commitssss/{id}', 'index')->name('commits.index'); // List commits for an ex-partner
         Route::post('/add-commits/{id}', 'store')->name('commits.store'); // Add a new commit to an ex-partner
         Route::put('/update-commit/{id}',  'update')->name('commits.update'); // Update a specific commit
         Route::get('/approve-commit/{id}',  'updateUserStatus'); // Update a specific commit
